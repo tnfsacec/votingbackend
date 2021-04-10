@@ -1,8 +1,17 @@
 const express = require('express')
 const app = express()
-const mysql = require("mysql")
+const mysql = require('mysql')
+const bodyParser = require('body-parser')
+//const cors = require('cors')
 
 const port = 8888
+
+/*const corsConfig = {
+	origin: 'localhost:3000/',
+	optionSuccessStatus: 200
+}*/
+
+//app.use(cors(corsConfig))
 
 const mysqlconfig = {
 	//mysql configuration
@@ -19,13 +28,17 @@ conn.connect((err) => {
 	console.log("connection success!!")
 })
 
-//app.use('json space',40)
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 
 app.get('/',(req,res)=>{
 	res.send("Hello World")
 })
 
 app.get('/home/:page',(req,res)=>{
+	res.set('Access-Control-Allow-Origin','*')
+	res.set('Access-Control-Allow-Headers','Content-Type')
+	res.header('Content-Type','application/json')
 	const pageid = parseInt(req.params.page,10)
 	if(pageid < 1){
 		return res.status('404')
@@ -48,7 +61,7 @@ app.get('/home/:page',(req,res)=>{
 				}
 			}
 			jsonReturn.count = count
-			return res.send(jsonReturn)
+			return res.json(jsonReturn)
 		})
 	})
 })
