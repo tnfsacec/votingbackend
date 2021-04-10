@@ -38,7 +38,7 @@ app.get('/',(req,res)=>{
 app.get('/home/:page',(req,res)=>{
 	res.set('Access-Control-Allow-Origin','*')
 	res.set('Access-Control-Allow-Headers','Content-Type')
-	res.header('Content-Type','application/json')
+	res.set('Content-Type','application/json')
 	const pageid = parseInt(req.params.page,10)
 	if(pageid < 1){
 		return res.status('404')
