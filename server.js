@@ -56,8 +56,8 @@ app.get('/home/:page',(req,res)=>{
 					continue;
 				}else{
 					count++
-					params = {priority:count+1,title: results[place].title,subtitle: results[place].subtitle,time: results[place].time,id: results[place].id}
-					jsonReturn[count] = params
+					params = {title: results[place].title,subtitle: results[place].subtitle,time: results[place].time,id: results[place].id}
+					jsonReturn["t"+count] = params
 				}
 			}
 			jsonReturn.count = count
