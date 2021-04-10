@@ -61,7 +61,8 @@ app.get('/home/:page',(req,res)=>{
 				}
 			}
 			jsonReturn.count = count
-			return res.json(jsonReturn)
+			//return res.json(JSON.parse(JSON.stringify(jsonReturn)))
+			return res.json({"name": "Dorothea"})
 		})
 	})
 })
