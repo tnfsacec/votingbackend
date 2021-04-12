@@ -67,6 +67,23 @@ app.get('/home/:page',(req,res)=>{
 	})
 })
 
+app.get('/post/:id',(req,res)=>{
+	postid = parseInt(req.params.id,10)
+	temp = 'select * from post where id = '+postid+';'
+	res.set('Access-Control-Allow-Origin','*')
+	res.set('Access-Control-Allow-Headers','Content-Type')
+	res.set('Content-Type','application/json')
+
+	conn.query(temp,(error,result)=>{
+		if(result.length === 0){
+			return res.json(null)
+		}
+		params = {title: result[0].title,context: result[0].context}
+
+		return res.json(JSON.parse(JSON.stringify(params)))
+	})
+})
+
 app.listen(port,()=>{
 	console.log("server running on port "+ port)
 })
