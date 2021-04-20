@@ -1,3 +1,3 @@
 #!/bin/sh
 
-pm2 start server.js -i max
+pm2 start index.js -i max --name docs
