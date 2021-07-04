@@ -48,16 +48,15 @@ app.get('/home/:page',(req,res)=>{
 		var begin = postcount[0].cnt-5*pageid+1//req.params.pageid*5-4
 		var end = postcount[0].cnt-5*pageid+5//(req.params.pageid*5)
 		temp = "select * from post where id between "+begin+" AND "+end+";"
-		var jsonReturn = {}
+		var jsonReturn = []
 		var count = 0
 		conn.query(temp,(err,results)=>{
 			for(var place = 4;place >= 0;--place){
 				if(results[place] === undefined){
 					continue;
 				}else{
-					count++
 					params = {title: results[place].title,subtitle: results[place].subtitle,time: results[place].time,id: results[place].id}
-					jsonReturn["t"+count] = params
+					jsonReturn.push(params)
 				}
 			}
 			jsonReturn.count = count
